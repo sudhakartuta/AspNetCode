@@ -16,6 +16,7 @@ namespace WebGentelBookStore
         // For more information on how to configure your application, visit https://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddControllersWithViews();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -26,15 +27,45 @@ namespace WebGentelBookStore
                 app.UseDeveloperExceptionPage();
             }
 
+            //app.Use(async (context, next) =>
+            //{
+            //    await context.Response.WriteAsync("Hello from First middleware");
+
+            //    await next();
+            //});
+
+            //app.Use(async (context, next) =>
+            //{
+            //    await context.Response.WriteAsync("Hello from Second middleware");
+            //    await next();
+
+            //});
+
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                endpoints.MapDefaultControllerRoute();
+                //endpoints.Map("/", async context =>
+                //{
+                //    await context.Response.WriteAsync("Hello World!");
+                //});
             });
+
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.Map("/", async context =>
+            //    {
+            //        if (env.IsDevelopment())
+            //            await context.Response.WriteAsync("Development");
+            //        else if (env.IsProduction())
+            //            await context.Response.WriteAsync("Production");
+            //        else if (env.IsStaging())
+            //            await context.Response.WriteAsync("Staging");
+            //        else
+            //            await context.Response.WriteAsync(env.EnvironmentName);
+            //    });
+            //});
         }
     }
 }
